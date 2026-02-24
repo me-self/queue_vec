@@ -1,0 +1,8 @@
+[package]
+name = "queue_vec"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+fixed_vec = { git = "https://github.com/sandmuel/fixed_vec" }
+bumpalo-herd = "0.1.2"
