@@ -3,29 +3,20 @@
 version = 4
 
 [[package]]
-name = "bumpalo"
-version = "3.19.1"
+name = "boxcar"
+version = "0.2.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5dd9dc738b7a8311c7ade152424974d8115f2cdad61e8dab8dac9f2362298510"
-
-[[package]]
-name = "bumpalo-herd"
-version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c51ab7ee02d3459317cc16fec045966c9120733a10229541acaf3cc81b137c95"
-dependencies = [
- "bumpalo",
-]
+checksum = "36f64beae40a84da1b4b26ff2761a5b895c12adc41dc25aaee1c4f2bbfe97a6e"
 
 [[package]]
 name = "fixed_vec"
 version = "0.1.0"
-source = "git+https://github.com/sandmuel/fixed_vec#a4597d058b3b00f285d5f3101441778a77698363"
+source = "git+https://github.com/me-self/fixed_vec#0b7a1dc14f10aa34300c8220c99b4af0da51c0aa"
 
 [[package]]
 name = "queue_vec"
 version = "0.1.0"
 dependencies = [
- "bumpalo-herd",
+ "boxcar",
  "fixed_vec",
 ]

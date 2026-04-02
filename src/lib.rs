@@ -1,21 +1,22 @@
 mod queue_vec;
 
+#[derive(Debug)]
+struct FooNode;
+
 #[cfg(test)]
 mod tests {
+    use crate::FooNode;
     use crate::queue_vec::QueueVec;
 
     #[test]
     fn single_threaded() {
-        let mut queue_vec = QueueVec::default();
-        queue_vec.push('h');
-        queue_vec.push('e');
-        queue_vec.push('l');
-        queue_vec.push('l');
-        queue_vec.push('o');
-        queue_vec.push('w');
-        queue_vec.push('o');
-        queue_vec.push('r');
-        queue_vec.push('l');
-        queue_vec.push('d');
+        let mut spill_queue = QueueVec::<FooNode>::new(3);
+        spill_queue.push(FooNode);
+        spill_queue.push(FooNode);
+        spill_queue.push(FooNode);
+        spill_queue.push(FooNode);
+        println!("{:?}", spill_queue.get(3));
+        spill_queue.defrag();
+        println!("{:?}", spill_queue.get(3));
     }
 }
