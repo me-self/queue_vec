@@ -1,4 +1,5 @@
 mod queue_vec;
+pub use queue_vec::QueueVec;
 
 #[derive(Debug)]
 struct FooNode;
