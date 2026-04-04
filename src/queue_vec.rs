@@ -22,18 +22,24 @@ impl<T> QueueVec<T> {
     }
 
     pub fn get(&self, index: usize) -> Option<&T> {
-        // TODO: unnecessary acquire.
         self.vec.get(index).or_else(|| {
-            println!("Index is in queue.");
-            self.queue.get(index - self.vec.len())
+            // It's ok to use `reserved_len` here since we aren't reading elements from the
+            // vec itself.
+            self.queue.get(index - self.vec.reserved_len())
         })
+    }
+
+    pub fn get_mut(&mut self, index: usize) -> Option<&mut T> {
+        self.vec
+            .get_mut(index)
+            .or_else(|| self.queue.get_mut(index - self.vec.reserved_len()))
     }
 
     pub fn defrag(&mut self) {
         let queue = take(&mut self.queue);
 
         let new_items = queue.into_iter();
-        let total_len = self.vec.len() + new_items.len();
+        let total_len = self.vec.reserved_len() + new_items.len();
         let new_length = total_len.next_power_of_two();
 
         self.vec.realloc(new_length);
