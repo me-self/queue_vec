@@ -23,11 +23,16 @@ impl<T> QueueVec<T> {
 
     pub fn get(&self, index: usize) -> Option<&T> {
         self.vec.get(index).or_else(|| {
-            println!("Index is in queue.");
             // It's ok to use `reserved_len` here since we aren't reading elements from the
             // vec itself.
             self.queue.get(index - self.vec.reserved_len())
         })
+    }
+
+    pub fn get_mut(&mut self, index: usize) -> Option<&mut T> {
+        self.vec
+            .get_mut(index)
+            .or_else(|| self.queue.get_mut(index - self.vec.reserved_len()))
     }
 
     pub fn defrag(&mut self) {
