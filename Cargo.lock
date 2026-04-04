@@ -11,7 +11,7 @@ checksum = "36f64beae40a84da1b4b26ff2761a5b895c12adc41dc25aaee1c4f2bbfe97a6e"
 [[package]]
 name = "fixed_vec"
 version = "0.1.0"
-source = "git+https://github.com/me-self/fixed_vec#2a6ef900f3e26d04b782759ed5c7bf1c691d46f4"
+source = "git+https://github.com/me-self/fixed_vec#aa442fefd413b1d1e15b1d3c8694f4bd326816d9"
 
 [[package]]
 name = "queue_vec"
