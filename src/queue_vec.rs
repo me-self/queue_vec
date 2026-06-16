@@ -1,5 +1,7 @@
 use fixed_vec::FixedVec;
-use std::mem::take;
+use std::mem::{take, transmute};
+
+pub struct ErasedQueueVec([u8; size_of::<QueueVec<()>>()]);
 
 #[derive(Debug)]
 pub struct QueueVec<T> {
@@ -13,6 +15,10 @@ impl<T> QueueVec<T> {
             vec: FixedVec::new(capacity),
             queue: boxcar::Vec::new(),
         }
+    }
+
+    pub fn erase(self) -> ErasedQueueVec {
+        ErasedQueueVec(unsafe { transmute::<Self, [u8; size_of::<QueueVec<()>>()]>(self) })
     }
 
     pub fn push(&self, item: T) -> usize {
@@ -31,7 +37,7 @@ impl<T> QueueVec<T> {
 
     pub fn get_mut(&mut self, index: usize) -> Option<&mut T> {
         if index < self.vec.capacity() {
-            return self.vec.get_mut(index)
+            return self.vec.get_mut(index);
         }
         self.queue.get_mut(index - self.vec.capacity())
     }
