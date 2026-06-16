@@ -1,5 +1,5 @@
 mod queue_vec;
-pub use queue_vec::QueueVec;
+pub use queue_vec::{QueueVec, ErasedQueueVec};
 
 #[derive(Debug)]
 struct FooNode;
